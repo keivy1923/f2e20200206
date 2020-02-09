@@ -2,6 +2,8 @@
     let monthes = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
     let weeks = ["S", "M", "T", "W", "T", "F", "S"];
     let yearInput = document.querySelector('#year');
+    let btnShow = document.querySelector('[data-action="submit"]');
+    let calendar = document.querySelector(".calendar");
 
     var d = new Date();
     var year = d.getFullYear();
@@ -10,17 +12,27 @@
     var mIndex = 0;
     var wIndex = 0;
     
+    init();
+    
+function init(){
     yearInput.setAttribute("value", year.toString());
+    btnShow.addEventListener("click",setYear);
+    btnShow.addEventListener("click",rebuildCalendar);
+    btnShow.addEventListener("click",buildCalendar);
+    buildCalendar();
+}
+
+function buildCalendar(){
+    mIndex = 0;
     monthes.forEach(element => {
         creatMonthArea(mIndex);
         mIndex++;
-        
     });
-
+}
+    
 function creatMonthArea(month){
     var monthDiv = createMonthHeader(month);
     var firstDay  = getMonthFirstDay(year,mIndex);
-    var lastDay = getMonthLastDay(year,mIndex);
     var days = getDaysInMonth(year,mIndex);
     var dIndex = 6;
     var dText = 0;
@@ -43,7 +55,7 @@ function creatMonthArea(month){
 }
 
 function createMonthHeader(month){
-    var calendar = document.querySelector(".calendar");
+    
     var monthDiv = document.createElement("div");
         monthDiv.setAttribute("class","month");
         calendar.appendChild(monthDiv);
@@ -70,8 +82,10 @@ function createWeekHeader(week){
 }
 
 function createDay(m,text,counter,monthDiv){
+    var d = new Date();
+    var thisYear = d.getFullYear();
     var  day = document.createElement("div");
-    if(m === month && text === today ) day.setAttribute("class","day today");
+    if(m === month && text === today  && thisYear === year) day.setAttribute("class","day today");
     else day.setAttribute("class","day");
     day.setAttribute("style","order:"+counter);
     day.innerHTML = text;
@@ -90,8 +104,16 @@ function getDaysInMonth(y,m){
     return new Date(y,(m+1),0).getDate();
 }
 
-function setYear(y){
-    
-    
-    this.year = y;
+function setYear(e){  
+    const form = document.forms['form-year'];
+    const fyear = form.year.value;
+    if(fyear >0 && fyear <= year){
+        year = fyear;
+    }    
+}
+
+function rebuildCalendar(){
+    while(calendar.hasChildNodes()){
+        calendar.removeChild(calendar.firstChild);
+    }
 }
