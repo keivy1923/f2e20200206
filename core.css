@@ -1,0 +1,65 @@
+* {
+    margin: 0;
+    padding: 0;
+    font-family: "Times New Roman", Times, serif;
+}
+
+body,
+body * {
+  display: flex;
+  justify-content: center;
+}
+
+section {
+    flex-direction: column;
+    align-self: center;
+}
+  
+.title-area{
+    text-align: center;
+    margin: 1.5rem;
+}
+
+#year{
+    display: inline-block;
+    text-align: center;
+}
+
+.calendar{
+    max-width: 50rem;
+}
+
+.calendar, .month {
+    flex-wrap: wrap;
+}
+
+.month{
+    align-items: flex-start;
+    width:calc(1.5em * 7);
+    padding: 1em;
+    cursor: pointer;
+}
+
+.day {
+    width: 1.5em;
+    height: 1.5em;
+    align-items: center;
+    justify-content: center;
+}
+
+h4 {
+    justify-content: center;
+    flex: 1 0 100%;
+    font-size: 1em;
+    text-transform: uppercase;
+    color: #f09;
+}
+
+.day:nth-of-type(7n),.day:nth-of-type(7n+1) {
+    color: #f09;
+}
+
+.today{
+    border-radius: 50%;
+    background-color: aqua;
+}
