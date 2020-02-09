@@ -1,4 +1,3 @@
-
     let monthes = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
     let weeks = ["S", "M", "T", "W", "T", "F", "S"];
     let yearInput = document.querySelector('#year');
@@ -85,7 +84,8 @@ function createDay(m,text,counter,monthDiv){
     var d = new Date();
     var thisYear = d.getFullYear();
     var  day = document.createElement("div");
-    if(m === month && text === today  && thisYear === year) day.setAttribute("class","day today");
+    
+    if(m === month && text === today  && thisYear == year) day.setAttribute("class","day today");
     else day.setAttribute("class","day");
     day.setAttribute("style","order:"+counter);
     day.innerHTML = text;
